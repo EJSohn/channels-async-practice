@@ -8,7 +8,7 @@ Channels 공식 페이지에 있는 documentation
 channel layer를 위해 redis 서버가 필요합니다.
 
 
-docker를 통해 받아서 사용하는 게 가장 쉽습니다.
+redis는 docker를 통해 받아서 사용하는 게 가장 쉽습니다.
 
 ```
 docker pull redis
@@ -21,13 +21,24 @@ docker run --name channels-redis -d -p 6379:6379 redis
 
 ```
 python manage.py runserver 0.0.0.0:your-port
-
 ```
 
 ```
 daphne -b 0.0.0.0 -p 8081 channels_tutorial.asgi:application
 ```
 
+### How to run (Docker)
 
+
+supervisor를 이용해 nginx, daphne를 실행합니다.
+
+channel_layer로 쓰일 backend만 변경하면 Docker를 이용한 배포를 하실 수 있습니다.
+
+
+```
+docker build -t channels_tutorial .
+
+docker run -i -p 8081:80 channels_tutorial
+```
 
 
